@@ -9,36 +9,66 @@
 
 	<div class="col-md-6">
 
-		<form class="p-1">
+		<form [formGroup]="form" class="p-1">
       <div class="pb-2 d-block d-md-none">
           <h3 class="border-bottom">Cadastro de Usuário</h3>
       </div>
       <div class="row">
           <div class="col-sm-6">
               <label class="form-label">Primeiro Nome</label>
-              <input type="text" class="form-control" placeholder="Insira o Primeiro nome" />
+              <input [ngClass]="{'is-invalid': f.primeiroNome.errors && f.primeiroNome.touched}" type="text" class="form-control" formControlName="primeiroNome" placeholder="Insira o Primeiro nome" />
+              <div class="invalid-feedback" *ngIf="f.primeiroNome.errors?.required">
+                Primeiro Nome é obrigatório
+              </div>
           </div>
           <div class="col-sm-6">
               <label class="form-label">Último nome</label>
-              <input type="text" class="form-control" placeholder="Insira o Último nome" />
+              <input [ngClass]="{'is-invalid': f.ultimoNome.errors && f.ultimoNome.touched}" type="text" class="form-control" formControlName="ultimoNome" placeholder="Insira o Último nome" />
+              <div class="invalid-feedback">
+                Último Nome é obrigatório
+              </div>
           </div>
       </div>
       <div class="form-group mt-2">
           <label for="">Email:</label>
-          <input class="form-control" type="text" placeholder="Insira o Nome Completo" />
+          <input [ngClass]="{'is-invalid': f.email.errors && f.email.touched}" class="form-control" formControlName="email" type="text" placeholder="Insira o email" />
+          <div class="invalid-feedback" *ngIf="f.email.errors?.required">
+            Email Nome é obrigatório
+          </div>
+          <div class="invalid-feedback" *ngIf="f.email.errors?.email">
+            Insira um email válido
+          </div>
       </div>
       <div class="form-group">
           <label for="">Usuario:</label>
-          <input class="form-control" type="text" placeholder="Insira o nome de Usuário" />      
+          <input [ngClass]="{'is-invalid': f.userName.errors && f.userName.touched}" class="form-control" formControlName="userName" type="text" placeholder="Insira o nome de Usuário" />
+          <div class="invalid-feedback" *ngIf="f.userName.errors?.required">
+            Username Nome é obrigatório
+          </div>
       </div>
       <div class="row">
           <div class="col-sm-6">
               <label for="">Senha:</label>
-              <input class="form-control" type="password" placeholder="Digite uma Senha" />
+              <input [ngClass]="{'is-invalid': f.senha.errors && f.senha.touched}" class="form-control" formControlName="senha" type="password" placeholder="Digite uma Senha" />
+              <div class="invalid-feedback" *ngIf="f.senha.errors?.required">
+                A senha é obrigatória
+              </div>
+              <div class="invalid-feedback" *ngIf="f.senha.errors?.minlength">
+                Deve contar no mínimo 6 caracteres.
+              </div>
           </div>
           <div class="col-sm-6">
               <label for="">Confirmar Senha:</label>
-              <input class="form-control" type="password" placeholder="Confirme a Senha" />
+              <input [ngClass]="{'is-invalid': f.confirmarSenha.errors && f.confirmarSenha.touched}" class="form-control" formControlName="confirmarSenha" type="password" placeholder="Confirme a Senha" />
+              <div class="invalid-feedback" *ngIf="f.confirmarSenha.errors?.required">
+                Confirmar a senha é obrigatório
+              </div>
+              <div class="invalid-feedback" *ngIf="f.confirmarSenha.errors?.minlength">
+                Deve conter no mínimo 6 caracteres.
+              </div>
+              <div class="invalid-feedback" *ngIf="f.confirmarSenha.errors?.mustMatch">
+                Senha e Confirmar Senha devem ser iguais.
+              </div>
           </div>
       </div>
       <div class="form-group form-check mt-2">
@@ -60,7 +90,7 @@
           </div>
       </div>
   </form>
-  
+
 
 	</div>
 </div>
